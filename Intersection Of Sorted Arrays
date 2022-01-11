@@ -1,0 +1,39 @@
+Problem Description
+
+Find the intersection of two sorted arrays. OR in other words, Given 2 sorted arrays, find all the elements which occur in both the arrays.
+
+Example:
+
+Input:
+    A: [1 2 3 3 4 5 6]
+    B: [3 3 5]
+
+Output: [3 3 5]
+
+Input:
+    A: [1 2 3 3 4 5 6]
+    B: [3 5]
+
+Output: [3 5]
+
+Source Code:
+
+class Solution:
+    # @param A : tuple of integers
+    # @param B : tuple of integers
+    # @return a list of integers
+    def intersect(self, A, B):
+        p=0
+        p1=0
+        res=[]
+        while(p<len(A) and p1<len(B)):
+            if(A[p]==B[p1]):
+                res.append(A[p])
+                p=p+1
+                p1=p1+1
+            elif A[p]<B[p1]:
+                p=p+1
+            else:
+                p1=p1+1
+        return res
+
