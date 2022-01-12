@@ -1,0 +1,47 @@
+Problem Description :
+
+Given an array of integers A, sort the array into a wave like array and return it, In other words, arrange the elements into a sequence such that
+
+a1 >= a2 <= a3 >= a4 <= a5…..
+NOTE : If there are multiple answers possible, return the one that's lexicographically smallest.
+
+Input Format
+
+First argument is an integer array A.
+
+Output Format
+
+Return an array arranged in the sequence as described.
+
+Example Input
+
+Input 1:
+
+A = [1, 2, 3, 4]
+Input 2:
+
+A = [1, 2]
+
+Example Output
+
+Output 1:
+
+[2, 1, 4, 3]
+Output 2:
+
+[2, 1]
+
+Source Code :
+
+class Solution:
+	# @param A : list of integers
+	# @return a list of integers
+	def wave(self, A):
+        A.sort()
+        if len(A)%2==0:
+            for i in range(0,len(A)-1,2):
+                A[i],A[i+1]=A[i+1],A[i]
+        else:                        
+            for i in range(0,len(A)-2,2):
+                A[i],A[i+1]=A[i+1],A[i]
+        return A
