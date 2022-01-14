@@ -1,0 +1,88 @@
+Problem Description :
+
+You are given two strings A and B of size N and M respectively.
+
+You have to find the count of all permutations of A present in B as a substring. You can assume a string will have only lowercase letters.
+
+Problem Constraints
+
+1 <= N < M <= 105
+
+Input Format
+
+Given two argument, A and B of type String.
+
+Output Format
+
+Return a single Integer, i.e number of permutations of A present in B as a substring.
+
+Example Input
+
+Input 1:
+
+ A = "abc"
+ B = "abcbacabc"
+Input 2:
+
+ A = "aca"
+ B = "acaa"
+
+Example Output
+
+Output 1:
+
+ 5
+Output 2:
+
+ 2
+
+Example Explanation
+
+Explanation 1:
+
+ Permutations of A that are present in B as substring are:
+    1. abc
+    2. cba
+    3. bac
+    4. cab
+    5. abc
+    So ans is 5.
+Explanation 2:
+
+ Permutations of A that are present in B as substring are:
+    1. aca
+    2. caa 
+ 
+ Source Code: 
+ 
+ class Solution:
+    # @param A : string
+    # @param B : string
+    # @return an integer
+    def solve(self, A, B):
+        count=0
+        f1=[0]*26
+        f2=[0]*26
+        arr=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        for i in A:
+            ind=arr.index(i)
+            f1[ind]=f1[ind]+1
+            
+        for i in range(len(A)):
+            ind=arr.index(B[i])
+            f2[ind]=f2[ind]+1
+
+        for i in range(0,len(B)-len(A)+1):
+            if f1==f2:
+                count=count+1
+            ind=arr.index(B[i])
+            f2[ind]=f2[ind]-1
+            if(i+len(A)<len(B)):
+                ind=arr.index(B[i+len(A)])
+                f2[ind]=f2[ind]+1
+            else:
+                break
+
+        return count
+        
+        
