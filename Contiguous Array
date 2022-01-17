@@ -1,0 +1,77 @@
+Problem Description :
+
+Given an array of integers A consisting of only 0 and 1.
+
+Find the maximum length of a contiguous subarray with equal number of 0 and 1.
+
+Input Format
+
+The only argument given is the integer array A.
+Output Format
+
+Return the maximum length of a contiguous subarray with equal number of 0 and 1.
+Constraints
+
+1 <= length of the array <= 100000
+0 <= A[i] <= 1
+For Example
+
+Input 1:
+    A = [1, 0, 1, 0, 1]
+Output 1:
+    4
+    Explanation 1:
+        Subarray from index 0 to index 3 : [1, 0, 1, 0]
+        Subarray from index 1 to index 4 : [0, 1, 0, 1]
+        Both the subarrays have equal number of ones and equal number of zeroes.
+
+Input 2:
+    A = [1, 1, 1, 0]
+Output 2:
+    2
+
+
+Source Code :
+
+Brute Force :
+
+class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        l=[]
+        for i in range(len(A)-1):
+            c=0
+            z=0
+            o=0
+            
+            for j in range(i,len(A)):
+                if A[j]==0:
+                    z+=1
+                if A[j]==1:
+                    o+=1
+                if o==z:
+                    c=o*2
+            l.append(c)
+        return max(l)
+   
+   Optimised Approch:
+   
+   class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        n = len(A)
+        res = 0
+        index = {0: -1}
+        prev = 0
+        for i in range(n):
+            if A[i] == 1:
+                prev += 1
+            else:
+                prev -= 1
+            if prev not in index:
+                index[prev] = i
+            else:
+                res = max(res,i-index[prev])
+        return res
